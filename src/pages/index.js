@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { services } from '../data/services';
 import Location from '../components/Location';
 import { FaWhatsapp, FaInstagram, FaFacebook, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import ThankYouMessage from '../components/ThankYouMessage';
 
 const HeroLinks = () => {
   const socialLinks = [
@@ -61,10 +62,21 @@ const Home = () => {
   const { events } = React.useContext(EventContext);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    // Check if we're returning from another page
+    const isReturningVisitor = sessionStorage.getItem('hasVisited');
+    
+    if (isReturningVisitor) {
+      // Skip loading screen for returning visitors
       setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
+    } else {
+      // Show loading screen only for first visit
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        // Set the flag in sessionStorage
+        sessionStorage.setItem('hasVisited', 'true');
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   useEffect(() => {
@@ -96,13 +108,14 @@ const Home = () => {
   return (
     <>
       <Navbar />
+      <ThankYouMessage />
       <main>
         {/* Hero Section */}
         <section id="hero" className={styles.hero}>
           <div className={styles.heroContent}>
             <h1>
               <div className={styles.titleLine}>
-                {"It is not just about Events and Marketing".split('').map((char, index) => (
+                {"From organizing events to managing your brand marketing".split('').map((char, index) => (
                   <span key={index}>
                     {char === ' ' ? '\u00A0' : char}
                   </span>
@@ -110,7 +123,7 @@ const Home = () => {
               </div>
             </h1>
             <p>
-              {"Transform your vision into extraordinary experiences".split('').map((char, index) => (
+              {" Team Blizzard is here for you.".split('').map((char, index) => (
                 <span key={index}>
                   {char === ' ' ? '\u00A0' : char}
                 </span>
@@ -125,7 +138,7 @@ const Home = () => {
         <section id="about" className={`section ${styles.about}`}>
           <div className="container">
             <h2 className="section-title">About Us</h2>
-            <div className="grid grid-2">
+            <div className={styles.aboutGrid}>
               <div className={styles.aboutContent}>
                 <h3>Welcome to Blizard Production House</h3>
                 <p>We are a premier event management company dedicated to creating extraordinary experiences. Our team of creative professionals brings your vision to life with meticulous attention to detail and innovative solutions.</p>
@@ -145,7 +158,11 @@ const Home = () => {
                 </div>
               </div>
               <div className={styles.aboutImage}>
-                <img src="/images/about.jpg" alt="About Us" />
+                <img 
+                  src="/images/about.jpg" 
+                  alt="About Blizard Production House"
+                  className={styles.imageStyle}
+                />
               </div>
             </div>
           </div>

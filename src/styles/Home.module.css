@@ -1,19 +1,40 @@
 .hero {
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url('/images/hero-bg.jpg') no-repeat center center/cover;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.6), /* Darker overlay */
+    rgba(0, 0, 0, 0.7)
+  ),
+  url('/images/hero-bg.png') no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: var(--light-color);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a subtle parallax effect */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  background-attachment: fixed;
+  filter: blur(1px);
+  z-index: -1;
 }
 
 .heroContent {
   max-width: 1200px;
   padding: 0 20px;
   width: 100%;
-  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 1s ease-out;
 }
 
 .heroContent h1 {
@@ -171,6 +192,14 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    background-attachment: scroll; /* Better mobile performance */
+  }
+  
+  .hero::before {
+    background-attachment: scroll;
+  }
+  
   .heroContent h1 span {
     font-size: clamp(1rem, 2vw, 2.5rem);
   }
@@ -699,5 +728,47 @@
   
   .socialLink {
     padding: 0.5rem 0.8rem;
+  }
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.aboutImage {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+}
+
+.imageStyle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.aboutImage:hover {
+  transform: translateY(-10px);
+}
+
+.aboutImage:hover .imageStyle {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .aboutImage {
+    margin-top: 2rem;
   }
 } 
