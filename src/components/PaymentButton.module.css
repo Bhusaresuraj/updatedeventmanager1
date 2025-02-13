@@ -1,0 +1,14 @@
+.paymentButton {
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.paymentButton:hover {
+  background-color: #005bb5;
+} 

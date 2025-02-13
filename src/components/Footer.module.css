@@ -1,0 +1,162 @@
+.footer {
+  background: var(--dark-color);
+  color: var(--light-color);
+  padding: 4rem 0 0;
+  position: relative;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+}
+
+.footerSection {
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, var(--accent-color), var(--light-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footerSection p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.footerSection h4 {
+  color: var(--light-color);
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footerSection h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background: var(--accent-color);
+}
+
+.footerSection ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footerSection ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footerSection ul li a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footerSection ul li a:hover {
+  color: var(--accent-color);
+  padding-left: 5px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.socialLinks a {
+  color: var(--light-color);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.socialLinks a:hover {
+  color: var(--accent-color);
+  transform: translateY(-3px);
+}
+
+.contactIcon {
+  margin-right: 0.5rem;
+  color: var(--accent-color);
+}
+
+.addressBlock {
+  font-style: normal;
+  line-height: 1.6;
+}
+
+.addressBlock a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.addressBlock a:hover {
+  color: var(--accent-color);
+}
+
+.footerBottom {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerBottom p {
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1rem;
+}
+
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.footerLinks a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerLinks a:hover {
+  color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footerSection {
+    text-align: center;
+  }
+
+  .footerSection h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .socialLinks {
+    justify-content: center;
+  }
+
+  .footerLinks {
+    flex-direction: column;
+    gap: 1rem;
+  }
+} 

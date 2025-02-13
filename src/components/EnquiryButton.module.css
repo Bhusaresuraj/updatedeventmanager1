@@ -1,0 +1,14 @@
+.enquiryButton {
+  background-color: #25D366; /* WhatsApp Green */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.enquiryButton:hover {
+  background-color: #128C7E; /* Darker Green on Hover */
+} 

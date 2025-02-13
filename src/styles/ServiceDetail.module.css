@@ -1,0 +1,183 @@
+.serviceDetail {
+  padding-top: 80px;
+}
+
+.heroSection {
+  position: relative;
+  height: 80vh;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.heroSection img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+  transition: transform 0.6s ease-out;
+}
+
+.heroSection:hover img {
+  transform: scale(1);
+}
+
+.heroContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 26, 46, 0.8) 0%,
+    rgba(26, 26, 46, 0.95) 100%
+  );
+  color: var(--light-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.heroContent h1 {
+  font-size: 4.5rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, var(--accent-color), var(--light-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideIn 0.8s ease-out 0.3s forwards;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideIn 0.8s ease-out 0.6s forwards;
+}
+
+.description {
+  padding: 6rem 0;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 0.9s forwards;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  padding: 4rem 0;
+  background: var(--gray-color);
+  border-radius: 30px;
+  margin: 4rem 0;
+}
+
+.featuresList,
+.benefitsList {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  opacity: 0;
+  animation: slideIn 0.8s ease-out 1.2s forwards;
+}
+
+.featuresList:hover,
+.benefitsList:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.featuresList h2,
+.benefitsList h2 {
+  color: var(--dark-color);
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.featuresList h2::after,
+.benefitsList h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+.featuresList ul,
+.benefitsList ul {
+  list-style: none;
+}
+
+.featuresList li,
+.benefitsList li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.featuresList li::before,
+.benefitsList li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  transition: var(--transition);
+}
+
+.featuresList li:hover,
+.benefitsList li:hover {
+  transform: translateX(10px);
+  color: var(--primary-color);
+}
+
+.featuresList li:hover::before,
+.benefitsList li:hover::before {
+  transform: translateX(5px);
+}
+
+.cta {
+  text-align: center;
+  padding: 6rem 0;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.5s forwards;
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--dark-color);
+}
+
+@media (max-width: 768px) {
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .description {
+    padding: 3rem 0;
+    font-size: 1.1rem;
+  }
+} 

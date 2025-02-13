@@ -1,0 +1,152 @@
+.aboutPage {
+  padding-top: 80px;
+}
+
+.aboutHero {
+  height: 60vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--light-color);
+}
+
+.heroContent {
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.heroContent h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: fadeInDown 1s ease;
+}
+
+.heroContent p {
+  font-size: 1.5rem;
+  animation: fadeInUp 1s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 20px;
+}
+
+.overviewGrid,
+.visionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.overviewImage,
+.visionImage {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+}
+
+.overviewImage:hover,
+.visionImage:hover {
+  transform: translateY(-10px);
+}
+
+.overviewContent,
+.visionContent {
+  padding: 2rem;
+}
+
+.overviewContent h2,
+.visionContent h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-color);
+}
+
+.overviewContent p,
+.visionContent p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-color);
+}
+
+.team {
+  background: var(--gray-color);
+}
+
+.team h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--dark-color);
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.teamMember {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.teamMember:hover {
+  transform: translateY(-10px);
+}
+
+.memberImage {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.teamMember h3 {
+  font-size: 1.5rem;
+  margin: 1rem 0 0.5rem;
+  color: var(--dark-color);
+}
+
+.teamMember p {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .aboutHero {
+    height: 50vh;
+  }
+
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroContent p {
+    font-size: 1.2rem;
+  }
+
+  .overviewGrid,
+  .visionGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .container {
+    padding: 4rem 20px;
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+} 

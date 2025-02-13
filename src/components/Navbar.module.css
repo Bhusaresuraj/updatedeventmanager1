@@ -1,0 +1,240 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 1000;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(0);
+}
+
+.scrolled {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.navbarContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logoMain {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--accent-color), var(--light-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.logoSub {
+  font-size: 0.9rem;
+  color: var(--light-color);
+  opacity: 0.8;
+  letter-spacing: 2px;
+  transform: translateX(5px);
+}
+
+.logo:hover .logoMain {
+  transform: scale(1.05);
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLinksInner {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink {
+  position: relative;
+  color: var(--light-color);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.navLinkText {
+  position: relative;
+  z-index: 1;
+}
+
+.navLinkHighlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover .navLinkHighlight,
+.navLink.active .navLinkHighlight {
+  width: 100%;
+}
+
+.navLink.active {
+  color: var(--accent-color);
+}
+
+.ctaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25D366; /* WhatsApp green */
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #128C7E; /* Darker WhatsApp green */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.hamburgerLines {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburgerLines span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--light-color);
+  transition: all 0.3s ease;
+  transform-origin: left;
+}
+
+.hamburger.active .hamburgerLines span:first-child {
+  transform: rotate(45deg);
+}
+
+.hamburger.active .hamburgerLines span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .hamburgerLines span:last-child {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navLinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: rgba(26, 26, 46, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    transition: right 0.3s ease;
+  }
+
+  .navLinks.active {
+    right: 0;
+  }
+
+  .navLinksInner {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .navLink {
+    font-size: 1.5rem;
+  }
+
+  .navCTA {
+    margin-top: 2rem;
+  }
+}
+
+/* Add animation for navbar items */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navLink {
+  animation: fadeInDown 0.5s ease forwards;
+  opacity: 0;
+}
+
+.navLink:nth-child(1) { animation-delay: 0.1s; }
+.navLink:nth-child(2) { animation-delay: 0.2s; }
+.navLink:nth-child(3) { animation-delay: 0.3s; }
+.navLink:nth-child(4) { animation-delay: 0.4s; }
+
+.ctaButton {
+  animation: fadeInDown 0.5s ease forwards 0.5s;
+  opacity: 0;
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .navLinks {
+    gap: 1rem;
+  }
+}
+
+/* Add these new styles */
+.whatsappIcon {
+  margin-right: 8px;
+  font-size: 1.2em;
+  vertical-align: middle;
+} 
