@@ -112,6 +112,16 @@ const Home = () => {
       <main>
         {/* Hero Section */}
         <section id="hero" className={styles.hero}>
+          <div className={styles.videoContainer}>
+            <iframe
+              src="https://www.youtube.com/embed/HuKzt1aEdhM?autoplay=1&mute=1&loop=1&playlist=HuKzt1aEdhM"
+              title="Blizzard Production House"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className={styles.videoFrame}
+            ></iframe>
+          </div>
           <div className={styles.heroContent}>
             <h1>
               <div className={styles.titleLine}>
