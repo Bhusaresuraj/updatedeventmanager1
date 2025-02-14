@@ -69,12 +69,12 @@ const Home = () => {
       // Skip loading screen for returning visitors
       setIsLoading(false);
     } else {
-      // Show loading screen only for first visit
+      // Show loading screen for 8 seconds on first visit
       const timer = setTimeout(() => {
         setIsLoading(false);
         // Set the flag in sessionStorage
         sessionStorage.setItem('hasVisited', 'true');
-      }, 2000);
+      }, 8000); // Changed to 8000 milliseconds (8 seconds)
       return () => clearTimeout(timer);
     }
   }, []);

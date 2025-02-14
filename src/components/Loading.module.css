@@ -12,7 +12,7 @@
   color: #333;
   margin-bottom: 30px;
   text-align: center;
-  animation: fadeIn 1s ease-in;
+  animation: fadeIn 2s ease-in;
 }
 
 .spinner {
@@ -21,7 +21,7 @@
   border: 5px solid #f3f3f3;
   border-top: 5px solid #0070f3;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 8s linear infinite;
 }
 
 @keyframes spin {
@@ -29,16 +29,19 @@
     transform: rotate(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: rotate(1440deg);
   }
 }
 
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
     transform: translateY(-20px);
   }
-  to {
+  50% {
+    opacity: 0.5;
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }

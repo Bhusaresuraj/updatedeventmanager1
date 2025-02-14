@@ -37,6 +37,13 @@ const Navbar = () => {
     e.preventDefault();
     setIsOpen(false);
 
+    // Check if it's a page route (starts with '/')
+    if (href.startsWith('/')) {
+      router.push(href);
+      return;
+    }
+
+    // Handle section scrolling
     if (router.pathname !== '/') {
       router.push('/').then(() => {
         setTimeout(() => {
@@ -74,17 +81,15 @@ const Navbar = () => {
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.navbarContent}>
-        <div className={styles.logo}>
-          <Link href="/" onClick={(e) => handleNavClick(e, '#hero')}>
-            <div className={styles.logoText}>
-              <span className={styles.logoMain}>Blizzard Production House</span>
-              
-            </div>
-          </Link>
-        </div>
+        <Link href="/" className={styles.logo}>
+          <div className={styles.logoText}>
+            <span className={styles.logoMain}>Blizz</span>
+            <span className={styles.logoSub}>Production House</span>
+          </div>
+        </Link>
 
-        <button 
-          className={`${styles.hamburger} ${isOpen ? styles.active : ''}`}
+        <button
+          className={styles.hamburger}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -101,6 +106,7 @@ const Navbar = () => {
               { href: '#hero', label: 'Home' },
               { href: '#about', label: 'About' },
               { href: '#services', label: 'Services' },
+              { href: '/why-blizz', label: 'Why Blizz' },
               { href: '#testimonials', label: 'Testimonials' },
               { href: '#location', label: 'Location' }
             ].map(({ href, label }) => (
@@ -108,18 +114,16 @@ const Navbar = () => {
                 key={href}
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
-                className={`${styles.navLink} ${activeSection === href.slice(1) ? styles.active : ''}`}
+                className={`${styles.navLink} ${
+                  !href.startsWith('/') && activeSection === href.slice(1) 
+                    ? styles.active 
+                    : ''
+                }`}
               >
                 <span className={styles.navLinkText}>{label}</span>
                 <span className={styles.navLinkHighlight}></span>
               </Link>
             ))}
-          </div>
-          <div className={styles.navCTA}>
-            <button className={styles.ctaButton} onClick={handleContact}>
-              <FaWhatsapp className={styles.whatsappIcon} />
-              Contact Us
-            </button>
           </div>
         </div>
       </div>
