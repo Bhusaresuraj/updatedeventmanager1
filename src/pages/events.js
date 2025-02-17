@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import EventCard from '../components/EventCard';
 import { EventContext } from '../context/EventContext';
 
+
 const Events = () => {
   const { events } = useContext(EventContext);
 

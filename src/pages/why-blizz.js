@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import styles from '../styles/WhyBlizz.module.css';
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Image from 'next/image';
+import OptimizedImage from '../components/OptimizedImage';
 
 const WhyBlizz = () => {
   const teamMembers = [
@@ -61,12 +62,11 @@ const WhyBlizz = () => {
               {teamMembers.map((member, index) => (
                 <div key={index} className={styles.teamCard}>
                   <div className={styles.memberImage}>
-                    <Image
-                      src={member.image}
+                    <OptimizedImage
+                      src="/images/team/vishal.png"
                       alt={member.name}
                       width={300}
                       height={300}
-                      objectFit="cover"
                       priority
                     />
                   </div>
@@ -105,8 +105,9 @@ const WhyBlizz = () => {
                       alt={artist.name}
                       width={300}
                       height={300}
-                      objectFit="cover"
                       priority
+                      style={{ objectFit: 'cover' }}
+                      loading="eager"
                     />
                   </div>
                   <div className={styles.artistInfo}>

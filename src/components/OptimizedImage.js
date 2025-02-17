@@ -1,20 +1,18 @@
 import Image from 'next/image';
 
-const OptimizedImage = ({ src, alt, width, height, className }) => {
+const OptimizedImage = ({ src, alt, width, height, ...props }) => {
+  const imagePath = src.startsWith('/') ? src : `/${src}`;
+  
   return (
-    <div className={className} style={{ position: 'relative' }}>
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        layout="responsive"
-        objectFit="cover"
-        quality={90}
-        placeholder="blur"
-        blurDataURL={src}
-      />
-    </div>
+    <Image
+      src={imagePath}
+      alt={alt}
+      width={width}
+      height={height}
+      loading="eager"
+      style={{ objectFit: 'cover' }}
+      {...props}
+    />
   );
 };
 

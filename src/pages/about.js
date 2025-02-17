@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import OptimizedImage from '../components/OptimizedImage';
 import styles from '../styles/About.module.css';
 
+
 const About = () => {
   const teamMembers = [
     {
