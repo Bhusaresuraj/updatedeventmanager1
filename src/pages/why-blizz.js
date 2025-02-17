@@ -3,13 +3,14 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import styles from '../styles/WhyBlizz.module.css';
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
+import Image from 'next/image';
 
 const WhyBlizz = () => {
   const teamMembers = [
     {
       name: "Akash Gupta",
       role: "Founder & CEO",
-      image: "/images/team/akash.jpg",
+      image: "/images/team/vishal.png",
       description: "Visionary leader with extensive experience in event management and production.",
       social: {
         linkedin: "https://linkedin.com/in/akash",
@@ -48,19 +49,26 @@ const WhyBlizz = () => {
       <main className={styles.whyBlizzPage}>
         <section className={styles.hero}>
           <div className={styles.heroContent}>
-            <h1>Why Choose Blizz</h1>
+            <h1>Why Choose Blizzard Production House</h1>
             <p>Meet the creative minds behind extraordinary events</p>
           </div>
         </section>
 
         <section className={styles.teamSection}>
           <div className="container">
-            <h2>Our Leadership</h2>
+            <h2>Our Leadership at Blizzard Production House</h2>
             <div className={styles.teamGrid}>
               {teamMembers.map((member, index) => (
                 <div key={index} className={styles.teamCard}>
                   <div className={styles.memberImage}>
-                    <img src={member.image} alt={member.name} />
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={300}
+                      height={300}
+                      objectFit="cover"
+                      priority
+                    />
                   </div>
                   <div className={styles.memberInfo}>
                     <h3>{member.name}</h3>

@@ -83,8 +83,8 @@ const Navbar = () => {
       <div className={styles.navbarContent}>
         <Link href="/" className={styles.logo}>
           <div className={styles.logoText}>
-            <span className={styles.logoMain}>Blizz</span>
-            <span className={styles.logoSub}>Production House</span>
+            <span className={styles.logoMain}>Blizzard Production House</span>
+            <span className={styles.logoSub}></span>
           </div>
         </Link>
 
