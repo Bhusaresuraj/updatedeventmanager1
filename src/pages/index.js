@@ -14,6 +14,7 @@ import { services } from '../data/services';
 import Location from '../components/Location';
 import { FaWhatsapp, FaInstagram, FaFacebook, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import ThankYouMessage from '../components/ThankYouMessage';
+import Image from 'next/image';
 
 const HeroLinks = () => {
   const socialLinks = [
@@ -168,10 +169,14 @@ const Home = () => {
                 </div>
               </div>
               <div className={styles.aboutImage}>
-                <img 
-                  src="/images/about.jpg" 
+                <Image 
+                  src="/images/about.jpg"
                   alt="About Blizard Production House"
+                  width={600}
+                  height={400}
+                  objectFit="cover"
                   className={styles.imageStyle}
+                  priority
                 />
               </div>
             </div>

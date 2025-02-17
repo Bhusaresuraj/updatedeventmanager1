@@ -100,7 +100,14 @@ const WhyBlizz = () => {
               {artists.map((artist, index) => (
                 <div key={index} className={styles.artistCard}>
                   <div className={styles.artistImage}>
-                    <img src={artist.image} alt={artist.name} />
+                    <Image
+                      src={artist.image}
+                      alt={artist.name}
+                      width={300}
+                      height={300}
+                      objectFit="cover"
+                      priority
+                    />
                   </div>
                   <div className={styles.artistInfo}>
                     <h3>{artist.name}</h3>

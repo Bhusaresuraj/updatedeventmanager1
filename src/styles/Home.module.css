@@ -291,8 +291,8 @@
 /* Move services styles outside media query and fix image path */
 .services {
   background: linear-gradient(
-    rgba(255, 255, 255, 0.92),
-    rgba(255, 255, 255, 0.92)
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.95)
   ),
   url('/images/services-bg.png') no-repeat center center/cover;
   position: relative;
