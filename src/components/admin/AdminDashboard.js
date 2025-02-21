@@ -1,46 +1,78 @@
 import { useState, useEffect } from 'react';
-import styles from './AdminDashboard.module.css';
+import styles from './AdminComponents.module.css';
 import { fetchStats } from '../../services/adminApi';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
     totalEvents: 0,
-    teamMembers: 0,
     upcomingEvents: 0,
-    services: 0
+    totalArtists: 0,
+    totalEnquiries: 0
   });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const getStats = async () => {
-      try {
-        const data = await fetchStats();
-        setStats(data);
-      } catch (error) {
-        console.error('Error fetching stats:', error);
-      }
-    };
-    getStats();
+    loadStats();
   }, []);
 
+  const loadStats = async () => {
+    try {
+      const data = await fetchStats();
+      setStats(data);
+    } catch (err) {
+      setError('Failed to load dashboard stats');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) {
+    return <div className={styles.loading}>Loading dashboard...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>{error}</div>;
+  }
+
   return (
-    <div className={styles.dashboard}>
-      <h1>Dashboard</h1>
+    <div className={styles.managerContainer}>
+      <h1>Admin Dashboard</h1>
+      
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
           <h3>Total Events</h3>
           <p>{stats.totalEvents}</p>
         </div>
         <div className={styles.statCard}>
-          <h3>Team Members</h3>
-          <p>{stats.teamMembers}</p>
-        </div>
-        <div className={styles.statCard}>
           <h3>Upcoming Events</h3>
           <p>{stats.upcomingEvents}</p>
         </div>
         <div className={styles.statCard}>
-          <h3>Services</h3>
-          <p>{stats.services}</p>
+          <h3>Total Artists</h3>
+          <p>{stats.totalArtists}</p>
+        </div>
+        <div className={styles.statCard}>
+          <h3>Pending Enquiries</h3>
+          <p>{stats.totalEnquiries}</p>
+        </div>
+      </div>
+
+      <div className={styles.quickActions}>
+        <h2>Quick Actions</h2>
+        <div className={styles.actionGrid}>
+          <button onClick={() => window.location.href = '/admin/events'}>
+            Manage Events
+          </button>
+          <button onClick={() => window.location.href = '/admin/artists'}>
+            Manage Artists
+          </button>
+          <button onClick={() => window.location.href = '/admin/enquiries'}>
+            View Enquiries
+          </button>
+          <button onClick={() => window.location.href = '/admin/services'}>
+            Manage Services
+          </button>
         </div>
       </div>
     </div>
