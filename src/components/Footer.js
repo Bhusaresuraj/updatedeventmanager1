@@ -2,8 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import { FaWhatsapp, FaInstagram, FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import styles from './Footer.module.css';
+import { useRouter } from 'next/router';
 
 const Footer = () => {
+  const router = useRouter();
+
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const element = document.querySelector(href);
@@ -107,6 +110,12 @@ const Footer = () => {
         <div className={styles.footerLinks}>
           <Link href="/privacy-policy">Privacy Policy</Link>
           <Link href="/terms">Terms of Service</Link>
+          <a 
+            href="/admin/login"
+            className={styles.adminLink}
+          >
+            Admin Login
+          </a>
         </div>
       </div>
     </footer>

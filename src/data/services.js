@@ -89,7 +89,7 @@ export const services = [
   },
   {
     id: 'akashwani',
-    title: 'Akashwani',
+    title: 'AkashVaani',
     shortDescription: 'Voice of entertainment and cultural broadcasting.',
     fullDescription: `Akashwani brings you the best in entertainment and cultural programming. We create and distribute engaging audio content that connects with audiences across platforms.`,
     image: '/images/akashwani.jpg',
@@ -111,7 +111,7 @@ export const services = [
   },
   {
     id: 'akash-sports',
-    title: 'Akash Sports Community',
+    title: 'Akash Sports Committee',
     shortDescription: 'Building communities through sports and entertainment.',
     fullDescription: `Our sports community initiative brings people together through sporting events and activities. We promote fitness, teamwork, and community engagement through various sports programs.`,
     image: '/images/sports-community.jpg',
