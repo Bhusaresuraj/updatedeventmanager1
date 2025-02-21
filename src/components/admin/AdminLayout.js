@@ -1,7 +1,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import styles from './AdminLayout.module.css';
-import { FaHome, FaUsers, FaCalendarAlt, FaImages, FaNewspaper, FaSignOutAlt } from 'react-icons/fa';
+import { 
+  FaHome, 
+  FaUsers, 
+  FaCalendarAlt, 
+  FaImages, 
+  FaNewspaper, 
+  FaSignOutAlt,
+  FaEnvelope,
+  FaComments,
+  FaStar,
+  FaGraduationCap
+} from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 
@@ -14,7 +25,11 @@ const AdminLayout = ({ children }) => {
     { icon: <FaUsers />, label: 'Team Members', path: '/admin/team' },
     { icon: <FaCalendarAlt />, label: 'Events', path: '/admin/events' },
     { icon: <FaImages />, label: 'Gallery', path: '/admin/gallery' },
-    { icon: <FaNewspaper />, label: 'Services', path: '/admin/services' }
+    { icon: <FaNewspaper />, label: 'Services', path: '/admin/services' },
+    { icon: <FaEnvelope />, label: 'Enquiries', path: '/admin/enquiries' },
+    { icon: <FaComments />, label: 'Testimonials', path: '/admin/testimonials' },
+    { icon: <FaStar />, label: 'Artists', path: '/admin/artists' },
+    { icon: <FaGraduationCap />, label: 'Academy', path: '/admin/academy' }
   ];
 
   const handleLogout = () => {
