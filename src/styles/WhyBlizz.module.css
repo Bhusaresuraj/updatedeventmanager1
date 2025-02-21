@@ -50,11 +50,11 @@
 
 .leaderCard {
   background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-radius: 15px;
   overflow: hidden;
   transition: transform 0.3s ease;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
 }
 
 .leaderCard:hover {
@@ -96,12 +96,12 @@
 
 .artistCard {
   background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-radius: 15px;
   overflow: hidden;
   transition: transform 0.3s ease;
   text-align: center;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
 }
 
 .artistCard:hover {
