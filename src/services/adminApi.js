@@ -146,3 +146,54 @@ export const deleteTeamMember = async (id) => {
 };
 
 // Add more admin API functions as needed 
+
+export const fetchServices = async () => {
+  const token = localStorage.getItem('adminToken');
+  const response = await fetch(`${API_URL}/admin/services`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  if (!response.ok) throw new Error('Failed to fetch services');
+  return response.json();
+};
+
+export const addEvent = async (eventData) => {
+  const token = localStorage.getItem('adminToken');
+  const formData = new FormData();
+  
+  // Append all event data to FormData
+  Object.keys(eventData).forEach(key => {
+    formData.append(key, eventData[key]);
+  });
+
+  const response = await fetch(`${API_URL}/admin/events`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${token}` },
+    body: formData
+  });
+  if (!response.ok) throw new Error('Failed to add event');
+  return response.json();
+};
+
+export const deleteEvent = async (id) => {
+  const token = localStorage.getItem('adminToken');
+  const response = await fetch(`${API_URL}/admin/events/${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  if (!response.ok) throw new Error('Failed to delete event');
+  return response.json();
+};
+
+export const handleEdit = async (event) => {
+  const token = localStorage.getItem('adminToken');
+  const response = await fetch(`${API_URL}/admin/events/${event.id}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(event)
+  });
+  if (!response.ok) throw new Error('Failed to update event');
+  return response.json();
+}; 

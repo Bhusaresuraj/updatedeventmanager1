@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
   background: linear-gradient(135deg, var(--dark-color) 0%, #2a2a4a 100%);
+  padding: 20px;
 }
 
 .loginForm {
@@ -20,37 +20,30 @@
   text-align: center;
   margin-bottom: 2rem;
   color: var(--dark-color);
-  font-size: 2rem;
 }
 
 .loginForm input {
   width: 100%;
-  padding: 12px;
+  padding: 0.8rem;
   margin-bottom: 1rem;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.loginForm input:focus {
-  border-color: var(--primary-color);
-  outline: none;
 }
 
 .loginForm button {
   width: 100%;
-  padding: 12px;
+  padding: 0.8rem;
   background: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.loginForm button:hover:not(:disabled) {
+.loginForm button:hover {
   background: var(--primary-color-dark);
 }
 
