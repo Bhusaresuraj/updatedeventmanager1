@@ -1,91 +1,93 @@
 import React from 'react';
+import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import styles from '../styles/WhyBlizz.module.css';
-import { FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaTrophy, FaUsers, FaInstagram } from 'react-icons/fa';
 import Image from 'next/image';
-import OptimizedImage from '../components/OptimizedImage';
 
 const WhyBlizz = () => {
-  const teamMembers = [
+  const leadership = [
     {
-      name: "Akash Gupta",
+      name: "Akash Sharma",
       role: "Founder & CEO",
-      image: "/images/team/vishal.png",
-      description: "Visionary leader with extensive experience in event management and production.",
-      social: {
-        linkedin: "https://linkedin.com/in/akash",
-        instagram: "https://instagram.com/akash"
-      }
+      image: "/images/team/akash.jpg",
+      description: "With over 5 years of experience in the entertainment industry, Akash has been the driving force behind Blizzard Production House's vision and growth.",
+      instagram: "https://www.instagram.com/akash_sharma"
     },
     {
-      name: "Co-Founder Name",
+      name: "Sagar Sharma",
       role: "Co-Founder & Creative Director",
-      image: "/images/team/cofounder.jpg",
-      description: "Creative genius behind our most innovative event concepts.",
-      social: {
-        linkedin: "https://linkedin.com/in/cofounder",
-        instagram: "https://instagram.com/cofounder"
-      }
-    },
-    // Add more team members here
+      image: "/images/team/sagar.jpg",
+      description: "A creative visionary with extensive experience in event production and artist management.",
+      instagram: "https://www.instagram.com/sagar_sharma"
+    }
   ];
 
   const artists = [
     {
-      name: "Artist Name",
+      name: "Rahul Kumar",
       specialty: "Dance Choreographer",
-      image: "/images/team/artist1.jpg",
-      description: "Expert in contemporary and classical dance forms.",
-      social: {
-        instagram: "https://instagram.com/artist1"
-      }
+      image: "/images/artists/rahul.jpg",
+      achievements: "Winner of Dance India Dance 2019",
+      instagram: "https://www.instagram.com/rahul_kumar"
     },
-    // Add more artists here
+    {
+      name: "Priya Singh",
+      specialty: "Vocalist",
+      image: "/images/artists/priya.jpg",
+      achievements: "Performed in over 100 live shows",
+      instagram: "https://www.instagram.com/priya_singh"
+    },
+    // Add more artists as needed
   ];
+
+  const handleInstagramClick = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <>
+      <Head>
+        <title>Why Choose Blizz - Blizzard Production House</title>
+        <meta name="description" content="Meet the team behind Blizzard Production House - leaders in event management and production services." />
+      </Head>
+
       <Navbar />
-      <main className={styles.whyBlizzPage}>
+
+      <main className={styles.main}>
         <section className={styles.hero}>
-          <div className={styles.heroContent}>
-            <h1>Why Choose Blizzard Production House</h1>
-            <p>Meet the creative minds behind extraordinary events</p>
+          <div className={styles.container}>
+            <h1>The Team Behind Blizzard</h1>
+            <p>Passionate Professionals Creating Extraordinary Experiences</p>
           </div>
         </section>
 
-        <section className={styles.teamSection}>
-          <div className="container">
-            <h2>Our Leadership at Blizzard Production House</h2>
-            <div className={styles.teamGrid}>
-              {teamMembers.map((member, index) => (
-                <div key={index} className={styles.teamCard}>
-                  <div className={styles.memberImage}>
-                    <OptimizedImage
-                      src="/images/team/vishal.png"
-                      alt={member.name}
+        <section className={styles.leadership}>
+          <div className={styles.container}>
+            <h2>Our Leadership</h2>
+            <div className={styles.leadershipGrid}>
+              {leadership.map((leader, index) => (
+                <div key={index} className={styles.leaderCard}>
+                  <div className={styles.leaderImage}>
+                    <Image
+                      src={leader.image}
+                      alt={leader.name}
                       width={300}
                       height={300}
-                      priority
+                      className={styles.profileImage}
                     />
+                    <button 
+                      className={styles.instagramButton}
+                      onClick={() => handleInstagramClick(leader.instagram)}
+                    >
+                      <FaInstagram /> Follow on Instagram
+                    </button>
                   </div>
-                  <div className={styles.memberInfo}>
-                    <h3>{member.name}</h3>
-                    <h4>{member.role}</h4>
-                    <p>{member.description}</p>
-                    <div className={styles.socialLinks}>
-                      {member.social.linkedin && (
-                        <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer">
-                          <FaLinkedin />
-                        </a>
-                      )}
-                      {member.social.instagram && (
-                        <a href={member.social.instagram} target="_blank" rel="noopener noreferrer">
-                          <FaInstagram />
-                        </a>
-                      )}
-                    </div>
+                  <div className={styles.leaderInfo}>
+                    <h3>{leader.name}</h3>
+                    <h4>{leader.role}</h4>
+                    <p>{leader.description}</p>
                   </div>
                 </div>
               ))}
@@ -93,41 +95,56 @@ const WhyBlizz = () => {
           </div>
         </section>
 
-        <section className={styles.artistSection}>
-          <div className="container">
-            <h2>Our Artists</h2>
-            <div className={styles.artistGrid}>
+        <section className={styles.artists}>
+          <div className={styles.container}>
+            <h2>Our Featured Artists</h2>
+            <div className={styles.artistsGrid}>
               {artists.map((artist, index) => (
                 <div key={index} className={styles.artistCard}>
                   <div className={styles.artistImage}>
                     <Image
                       src={artist.image}
                       alt={artist.name}
-                      width={300}
-                      height={300}
-                      priority
-                      style={{ objectFit: 'cover' }}
-                      loading="eager"
+                      width={250}
+                      height={250}
+                      className={styles.profileImage}
                     />
+                    <button 
+                      className={styles.instagramButton}
+                      onClick={() => handleInstagramClick(artist.instagram)}
+                    >
+                      <FaInstagram /> Follow
+                    </button>
                   </div>
                   <div className={styles.artistInfo}>
                     <h3>{artist.name}</h3>
                     <h4>{artist.specialty}</h4>
-                    <p>{artist.description}</p>
-                    <div className={styles.socialLinks}>
-                      {artist.social.instagram && (
-                        <a href={artist.social.instagram} target="_blank" rel="noopener noreferrer">
-                          <FaInstagram />
-                        </a>
-                      )}
-                    </div>
+                    <p>{artist.achievements}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+        <section className={styles.stats}>
+          <div className={styles.container}>
+            <div className={styles.statsGrid}>
+              <div className={styles.statCard}>
+                <FaTrophy className={styles.statIcon} />
+                <h3>500+</h3>
+                <p>Events Managed</p>
+              </div>
+              <div className={styles.statCard}>
+                <FaUsers className={styles.statIcon} />
+                <h3>50+</h3>
+                <p>Professional Artists</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
       <Footer />
     </>
   );

@@ -3,24 +3,18 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
   z-index: 1000;
+  padding: 1rem 0;
   background: transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(0);
   backdrop-filter: blur(0);
 }
 
-.scrolled {
-  background: rgba(26, 26, 46, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.navbarContent {
+.navContainer {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,17 +23,20 @@
 .logo {
   position: relative;
   z-index: 2;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .logoText {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
 }
 
 .logoMain {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
+  color: var(--light-color);
   background: linear-gradient(45deg, var(--accent-color), var(--light-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -50,8 +47,6 @@
   font-size: 0.9rem;
   color: var(--light-color);
   opacity: 0.8;
-  letter-spacing: 2px;
-  transform: translateX(5px);
 }
 
 .logo:hover .logoMain {
@@ -62,102 +57,72 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+  margin-left: auto;
 }
 
-.navLinksInner {
-  display: flex;
-  gap: 2rem;
-}
-
-.navLink {
-  position: relative;
+.navLinks a {
   color: var(--light-color);
   text-decoration: none;
   font-weight: 500;
+  position: relative;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
 }
 
-.navLinkText {
-  position: relative;
-  z-index: 1;
+.navLinks a:hover {
+  color: var(--accent-color);
 }
 
-.navLinkHighlight {
+.navLinks a::after {
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--gradient-primary);
+  background: var(--accent-color);
   transition: width 0.3s ease;
 }
 
-.navLink:hover .navLinkHighlight,
-.navLink.active .navLinkHighlight {
+.navLinks a:hover::after {
   width: 100%;
 }
 
-.navLink.active {
-  color: var(--accent-color);
-}
-
-.ctaButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: #25D366; /* WhatsApp green */
-  transition: all 0.3s ease;
-}
-
-.ctaButton:hover {
-  background: #128C7E; /* Darker WhatsApp green */
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-}
-
-.hamburger {
+/* Mobile menu button */
+.mobileMenuButton {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  z-index: 2;
+  padding: 0.5rem;
+  z-index: 100;
 }
 
-.hamburgerLines {
-  width: 30px;
-  height: 20px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.hamburgerLines span {
+.mobileMenuButton span {
   display: block;
-  width: 100%;
+  width: 24px;
   height: 2px;
   background: var(--light-color);
+  margin: 5px 0;
   transition: all 0.3s ease;
-  transform-origin: left;
 }
 
-.hamburger.active .hamburgerLines span:first-child {
-  transform: rotate(45deg);
+/* Mobile menu states */
+.mobileMenuButton.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
-.hamburger.active .hamburgerLines span:nth-child(2) {
+.mobileMenuButton.open span:nth-child(2) {
   opacity: 0;
 }
 
-.hamburger.active .hamburgerLines span:last-child {
-  transform: rotate(-45deg);
+.mobileMenuButton.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
-  .hamburger {
+  .mobileMenuButton {
     display: block;
   }
 
@@ -168,6 +133,7 @@
     width: 100%;
     height: 100vh;
     background: rgba(26, 26, 46, 0.98);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     flex-direction: column;
     justify-content: center;
@@ -175,23 +141,38 @@
     transition: right 0.3s ease;
   }
 
-  .navLinks.active {
+  .navLinks.open {
     right: 0;
   }
 
-  .navLinksInner {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+  .navLinks a {
+    font-size: 1.2rem;
+    padding: 1rem 0;
   }
 
-  .navLink {
+  .logoMain {
     font-size: 1.5rem;
   }
 
-  .navCTA {
-    margin-top: 2rem;
+  .logoSub {
+    font-size: 0.8rem;
   }
+}
+
+/* Scrolled state */
+.scrolled {
+  background: rgba(26, 26, 46, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Service page state */
+.servicePage {
+  background: rgba(26, 26, 46, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Add animation for navbar items */
@@ -237,4 +218,17 @@
   margin-right: 8px;
   font-size: 1.2em;
   vertical-align: middle;
+}
+
+/* Add this new class for solid background without blur */
+.solidBg {
+  background: var(--dark-color);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure the solid background takes precedence */
+.navbar.solidBg {
+  background: var(--dark-color) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 } 

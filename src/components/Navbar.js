@@ -5,68 +5,53 @@ import styles from './Navbar.module.css';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
+
+  const isServicePage = router.pathname.startsWith('/services');
+  const isWhyBlizzPage = router.pathname === '/why-blizz';
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setScrolled(scrollPosition > 50);
-
-      // Update active section based on scroll position
-      const sections = ['hero', 'about', 'services', 'testimonials'];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
+      if (isWhyBlizzPage) {
+        setIsScrolled(true);
+        return;
       }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isWhyBlizzPage]);
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = async (e, href) => {
     e.preventDefault();
-    setIsOpen(false);
+    setIsMobileMenuOpen(false);
 
-    // Check if it's a page route (starts with '/')
-    if (href.startsWith('/')) {
-      router.push(href);
+    // If href is a full page route (like /why-blizz), navigate directly
+    if (!href.startsWith('#')) {
+      await router.push(href);
       return;
     }
 
-    // Handle section scrolling
+    // If we're not on the home page and trying to navigate to a section
     if (router.pathname !== '/') {
-      router.push('/').then(() => {
-        setTimeout(() => {
-          const element = document.querySelector(href);
-          if (element) {
-            element.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-              inline: 'nearest'
-            });
-          }
-        }, 100);
-      });
-      return;
-    }
-
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
-      });
+      await router.push('/');
+      // Wait for navigation to complete
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If we're already on home page, just scroll to section
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -79,8 +64,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.navbarContent}>
+    <nav className={`
+      ${styles.navbar} 
+      ${isScrolled ? styles.scrolled : ''} 
+      ${isServicePage ? styles.servicePage : ''}
+      ${isWhyBlizzPage ? styles.solidBg : ''}
+    `}>
+      <div className={styles.navContainer}>
         <Link href="/" className={styles.logo}>
           <div className={styles.logoText}>
             <span className={styles.logoMain}>Blizzard Production House</span>
@@ -88,43 +78,35 @@ const Navbar = () => {
           </div>
         </Link>
 
-        <button
-          className={styles.hamburger}
-          onClick={() => setIsOpen(!isOpen)}
+        <button 
+          className={`${styles.mobileMenuButton} ${isMobileMenuOpen ? styles.open : ''}`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          <div className={styles.hamburgerLines}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
 
-        <div className={`${styles.navLinks} ${isOpen ? styles.active : ''}`}>
-          <div className={styles.navLinksInner}>
-            {[
-              { href: '#hero', label: 'Home' },
-              { href: '#about', label: 'About' },
-              { href: '#services', label: 'Services' },
-              { href: '/why-blizz', label: 'Why Blizz' },
-              { href: '#testimonials', label: 'Testimonials' },
-              { href: '#location', label: 'Location' }
-            ].map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={(e) => handleNavClick(e, href)}
-                className={`${styles.navLink} ${
-                  !href.startsWith('/') && activeSection === href.slice(1) 
-                    ? styles.active 
-                    : ''
-                }`}
-              >
-                <span className={styles.navLinkText}>{label}</span>
-                <span className={styles.navLinkHighlight}></span>
-              </Link>
-            ))}
-          </div>
+        <div className={`${styles.navLinks} ${isMobileMenuOpen ? styles.open : ''}`}>
+          <Link href="/" onClick={(e) => handleNavClick(e, '/')}>
+            Home
+          </Link>
+          <Link href="/#about" onClick={(e) => handleNavClick(e, '#about')}>
+            About
+          </Link>
+          <Link href="/why-blizz" onClick={(e) => handleNavClick(e, '/why-blizz')}>
+            Why Blizz
+          </Link>
+          <Link href="/#services" onClick={(e) => handleNavClick(e, '#services')}>
+            Services
+          </Link>
+          <Link href="/#testimonials" onClick={(e) => handleNavClick(e, '#testimonials')}>
+            Testimonials
+          </Link>
+          <Link href="/#contact" onClick={(e) => handleNavClick(e, '#contact')}>
+            Contact
+          </Link>
         </div>
       </div>
     </nav>

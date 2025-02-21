@@ -137,9 +137,10 @@
 
 .aboutContent {
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   box-shadow: var(--box-shadow);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -313,6 +314,7 @@
 
 .serviceBlog {
   background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   overflow: hidden;
@@ -854,4 +856,14 @@
     width: 200px;
     height: 113px;
   }
+}
+
+.ctaButton {
+  padding: 0.8rem 1.2rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  color: var(--light-color);
+  text-decoration: none;
 } 

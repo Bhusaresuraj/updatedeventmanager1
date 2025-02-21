@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import EnquiryButton from '../../components/EnquiryButton';
 import { services } from '../../data/services';
-import styles from '../../styles/ServiceDetail.module.css';
+import styles from '../../styles/services/Service.module.css';
 
 export async function getStaticPaths() {
   const paths = services.map((service) => ({
@@ -67,9 +67,10 @@ const ServiceDetail = ({ service }) => {
   }
 
   return (
-    <>
+    <div className={styles.serviceContainer}>
       <Navbar />
-      <main className={styles.serviceDetail}>
+      
+      <main className={styles.serviceContent}>
         <div className={styles.heroSection}>
           <img src={service.image} alt={service.title} />
           <div className={styles.heroContent}>
@@ -78,7 +79,7 @@ const ServiceDetail = ({ service }) => {
           </div>
         </div>
 
-        <div className="container">
+        <div className={styles.contentWrapper}>
           <section className={styles.description}>
             <p>{service.fullDescription}</p>
           </section>
@@ -104,13 +105,14 @@ const ServiceDetail = ({ service }) => {
           </div>
 
           <section className={styles.cta}>
-            <h2>Ready to Plan Your Event?</h2>
+            <h2>Ready to Get Started?</h2>
             <EnquiryButton />
           </section>
         </div>
       </main>
+
       <Footer />
-    </>
+    </div>
   );
 };
 
