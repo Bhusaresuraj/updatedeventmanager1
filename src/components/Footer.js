@@ -110,12 +110,6 @@ const Footer = () => {
         <div className={styles.footerLinks}>
           <Link href="/privacy-policy">Privacy Policy</Link>
           <Link href="/terms">Terms of Service</Link>
-          <a 
-            href="/admin/login"
-            className={styles.adminLink}
-          >
-            Admin Login
-          </a>
         </div>
       </div>
     </footer>
