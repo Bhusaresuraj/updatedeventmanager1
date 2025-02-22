@@ -10,9 +10,17 @@ import {
 import { toast } from 'react-toastify';
 
 const AdminLayout = ({ children }) => {
+  const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-  const router = useRouter();
+
+  // Check authentication on mount
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      router.push('/admin/login');
+    }
+  }, [router]);
 
   useEffect(() => {
     const checkMobile = () => {
