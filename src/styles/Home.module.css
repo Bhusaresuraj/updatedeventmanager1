@@ -868,14 +868,6 @@
   text-decoration: none;
 }
 
-/* Add Safari-specific styles */
-@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-  .ctaButton {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-  }
-}
-
 /* Fallback for browsers that don't support backdrop-filter */
 @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .ctaButton {

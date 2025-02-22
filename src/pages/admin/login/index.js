@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/AdminLogin.module.css';
 import { toast } from 'react-toastify';
@@ -12,31 +12,42 @@ const AdminLogin = () => {
     password: ''
   });
 
+  // Redirect if already logged in
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (token) {
+      router.push('/admin');
+    }
+  }, [router]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     try {
-      // Simple credential check
       if (
         credentials.email === 'admin@example.com' && 
         credentials.password === 'admin123'
       ) {
-        // Create token
         const token = btoa(Date.now().toString());
         
-        // Store in localStorage for client-side checks
+        // Set cookie first
+        document.cookie = `adminToken=${token}; path=/; max-age=86400; SameSite=Strict`;
+        
+        // Then localStorage
         localStorage.setItem('adminToken', token);
         
-        // Store in cookie for server-side checks
-        document.cookie = `adminToken=${token}; path=/; max-age=86400`;
-        
         toast.success('Login successful!');
-        router.push('/admin');
+        
+        // Redirect after everything is set
+        setTimeout(() => {
+          router.push('/admin');
+        }, 100);
       } else {
         throw new Error('Invalid credentials');
       }
     } catch (error) {
       toast.error('Invalid credentials');
+      console.error('Login error:', error);
     }
   };
 
