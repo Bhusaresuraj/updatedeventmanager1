@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { fetchTeamMembers, addTeamMember, deleteTeamMember } from '../../services/adminApi';
+import AdminService from '../../services/adminService';
 import styles from '../../styles/AdminTeam.module.css';
+import { toast } from 'react-toastify';
 
 const TeamManagement = () => {
   const [teamMembers, setTeamMembers] = useState([]);
-  const [newMember, setNewMember] = useState({
+  const [loading, setLoading] = useState(true);
+  const [formData, setFormData] = useState({
     name: '',
     role: '',
     image: '',
-    description: ''
+    bio: ''
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     loadTeamMembers();
@@ -21,105 +20,113 @@ const TeamManagement = () => {
 
   const loadTeamMembers = async () => {
     try {
-      const data = await fetchTeamMembers();
+      const data = await AdminService.getTeamMembers();
       setTeamMembers(data);
     } catch (error) {
-      setError('Failed to load team members');
-    }
-  };
-
-  const handleAddMember = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
-    setSuccess('');
-
-    try {
-      const data = await addTeamMember(newMember);
-      setTeamMembers([...teamMembers, data]);
-      setNewMember({ name: '', role: '', image: '', description: '' });
-      setSuccess('Team member added successfully!');
-    } catch (error) {
-      setError('Failed to add team member');
+      toast.error('Failed to load team members');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
-  const handleDeleteMember = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this team member?')) {
-      return;
-    }
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await deleteTeamMember(id);
-      setTeamMembers(teamMembers.filter(member => member.id !== id));
-      setSuccess('Team member deleted successfully!');
+      const newMember = await AdminService.addTeamMember(formData);
+      setTeamMembers([...teamMembers, newMember]);
+      setFormData({ name: '', role: '', image: '', bio: '' });
+      toast.success('Team member added successfully!');
     } catch (error) {
-      setError('Failed to delete team member');
+      toast.error('Failed to add team member');
     }
   };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this team member?')) return;
+    
+    try {
+      await AdminService.deleteTeamMember(id);
+      setTeamMembers(teamMembers.filter(member => member.id !== id));
+      toast.success('Team member deleted successfully!');
+    } catch (error) {
+      toast.error('Failed to delete team member');
+    }
+  };
+
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div className={styles.loading}>Loading team members...</div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
-      <div className={styles.teamManagement}>
+      <div className={styles.container}>
         <h1>Team Management</h1>
-        
-        {error && <div className={styles.error}>{error}</div>}
-        {success && <div className={styles.success}>{success}</div>}
-        
-        <form onSubmit={handleAddMember} className={styles.addMemberForm}>
-          <h2>Add New Team Member</h2>
-          <input
-            type="text"
-            placeholder="Name"
-            value={newMember.name}
-            onChange={(e) => setNewMember({...newMember, name: e.target.value})}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Role"
-            value={newMember.role}
-            onChange={(e) => setNewMember({...newMember, role: e.target.value})}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={newMember.image}
-            onChange={(e) => setNewMember({...newMember, image: e.target.value})}
-            required
-          />
-          <textarea
-            placeholder="Description"
-            value={newMember.description}
-            onChange={(e) => setNewMember({...newMember, description: e.target.value})}
-            required
-          />
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Adding...' : 'Add Member'}
-          </button>
-        </form>
 
-        <div className={styles.teamList}>
-          <h2>Current Team Members</h2>
+        <div className={styles.addMemberForm}>
+          <h2>Add New Team Member</h2>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.formGroup}>
+              <label>Name</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                required
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Role</label>
+              <input
+                type="text"
+                value={formData.role}
+                onChange={(e) => setFormData({...formData, role: e.target.value})}
+                required
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Image URL</label>
+              <input
+                type="text"
+                value={formData.image}
+                onChange={(e) => setFormData({...formData, image: e.target.value})}
+                required
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Bio</label>
+              <textarea
+                value={formData.bio}
+                onChange={(e) => setFormData({...formData, bio: e.target.value})}
+                required
+              />
+            </div>
+            <button type="submit" className={styles.submitButton}>
+              Add Team Member
+            </button>
+          </form>
+        </div>
+
+        <div className={styles.teamGrid}>
           {teamMembers.map(member => (
             <div key={member.id} className={styles.memberCard}>
               <img src={member.image} alt={member.name} />
               <div className={styles.memberInfo}>
                 <h3>{member.name}</h3>
-                <p>{member.role}</p>
-                <p className={styles.description}>{member.description}</p>
-              </div>
-              <div className={styles.actions}>
-                <button onClick={() => handleDeleteMember(member.id)}>Delete</button>
+                <p className={styles.role}>{member.role}</p>
+                <p className={styles.bio}>{member.bio}</p>
+                <button 
+                  onClick={() => handleDelete(member.id)}
+                  className={styles.deleteButton}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}
-          {teamMembers.length === 0 && (
-            <p className={styles.noMembers}>No team members found</p>
-          )}
         </div>
       </div>
     </AdminLayout>
