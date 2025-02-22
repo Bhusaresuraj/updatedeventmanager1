@@ -5,6 +5,8 @@
   justify-content: center;
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   padding: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .loginCard {
@@ -14,6 +16,8 @@
   box-shadow: 0 8px 30px rgba(0,0,0,0.2);
   width: 100%;
   max-width: 400px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .loginCard h1 {
@@ -30,6 +34,7 @@
 
 .inputGroup {
   position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .inputIcon {
@@ -47,6 +52,8 @@
   border: 2px solid #eee;
   border-radius: 8px;
   font-size: 1rem;
+  -webkit-appearance: none;
+  appearance: none;
   transition: all 0.3s ease;
 }
 
@@ -57,19 +64,37 @@
 }
 
 .loginButton {
+  width: 100%;
+  padding: 1rem;
   background: #1e3c72;
   color: white;
   border: none;
-  padding: 1rem;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
   transition: all 0.3s ease;
 }
 
-.loginButton:hover {
-  background: #2a5298;
-  transform: translateY(-2px);
+/* Add hover effects only for non-touch devices */
+@media (hover: hover) {
+  .loginButton:hover {
+    background: #2a5298;
+    transform: translateY(-2px);
+  }
+}
+
+/* Mobile Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .loginContainer {
+    min-height: -webkit-fill-available;
+  }
+  
+  .inputGroup input,
+  .loginButton {
+    font-size: 16px; /* Prevent zoom on focus in iOS */
+  }
 }
 
 .hint {

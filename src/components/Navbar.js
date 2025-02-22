@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from './Navbar.module.css';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const [isSafari, setIsSafari] = useState(false);
 
   const isServicePage = router.pathname.startsWith('/services');
   const isWhyBlizzPage = router.pathname === '/why-blizz';
@@ -25,6 +26,12 @@ const Navbar = () => {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isWhyBlizzPage]);
+
+  useEffect(() => {
+    // Check if browser is Safari
+    const isSafariBrowser = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    setIsSafari(isSafariBrowser);
+  }, []);
 
   const handleNavClick = async (e, href) => {
     e.preventDefault();
@@ -69,6 +76,7 @@ const Navbar = () => {
       ${isScrolled ? styles.scrolled : ''} 
       ${isServicePage ? styles.servicePage : ''}
       ${isWhyBlizzPage ? styles.solidBg : ''}
+      ${isSafari ? styles.safariNav : ''}
     `}>
       <div className={styles.navContainer}>
         <Link href="/" className={styles.logo}>

@@ -2,4 +2,16 @@
   /* ... other styles ... */
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+}
+
+/* Safari-specific styles */
+.safariNav {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .navbar {
+    background: rgba(255, 255, 255, 0.95);
+  }
 } 
