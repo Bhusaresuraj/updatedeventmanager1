@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/AdminLogin.module.css';
 import { toast } from 'react-toastify';
-import AdminService from '../../services/adminService';
 import { FaUser, FaLock } from 'react-icons/fa';
 import Head from 'next/head';
 
@@ -18,30 +17,26 @@ const AdminLogin = () => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      // Log the attempt
-      console.log('Login attempt with:', {
-        email: credentials.email,
-        expectedEmail: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
-        passwordMatch: credentials.password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD
-      });
+    // Simple validation for development
+    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+    const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
 
-      const data = await AdminService.login(credentials);
-      
-      // Store token
-      localStorage.setItem('adminToken', data.token);
-      
-      // Show success message
-      toast.success('Login successful! Redirecting...');
-      
-      // Redirect after a short delay
-      setTimeout(() => {
-        router.push('/admin');
-      }, 1000);
-      
+    try {
+      if (credentials.email === adminEmail && credentials.password === adminPassword) {
+        // Create a simple token
+        const token = btoa(Date.now() + adminEmail);
+        localStorage.setItem('adminToken', token);
+        
+        toast.success('Login successful!');
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1000);
+      } else {
+        throw new Error('Invalid credentials');
+      }
     } catch (error) {
+      toast.error(error.message || 'Login failed');
       console.error('Login error:', error);
-      toast.error(error.message || 'Invalid email or password');
     } finally {
       setLoading(false);
     }
@@ -50,7 +45,7 @@ const AdminLogin = () => {
   return (
     <>
       <Head>
-        <title>Admin Login - Blizzard Production House</title>
+        <title>Admin Login</title>
       </Head>
       <div className={styles.loginContainer}>
         <div className={styles.loginCard}>
@@ -87,8 +82,8 @@ const AdminLogin = () => {
           
           <div className={styles.hint}>
             <p>Default Admin Credentials:</p>
-            <p>Email: {process.env.NEXT_PUBLIC_ADMIN_EMAIL}</p>
-            <p>Password: {process.env.NEXT_PUBLIC_ADMIN_PASSWORD}</p>
+            <p>Email: admin@example.com</p>
+            <p>Password: admin123</p>
           </div>
         </div>
       </div>

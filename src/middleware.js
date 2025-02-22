@@ -5,15 +5,15 @@ export function middleware(request) {
   
   // Check if it's an admin route
   if (pathname.startsWith('/admin')) {
-    // Allow access to login page
+    // Always allow access to login page
     if (pathname === '/admin/login') {
       return NextResponse.next();
     }
 
     // Check for auth token
-    const token = request.cookies.get('adminToken');
-    
-    // If no token, redirect to login
+    const token = request.cookies.get('adminToken')?.value || 
+                 request.headers.get('authorization')?.split(' ')[1];
+
     if (!token) {
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
