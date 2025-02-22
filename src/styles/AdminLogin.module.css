@@ -1,69 +1,93 @@
 .loginContainer {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--dark-color) 0%, #2a2a4a 100%);
-  padding: 20px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 1rem;
 }
 
-.loginForm {
+.loginCard {
   background: white;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
   width: 100%;
   max-width: 400px;
 }
 
-.loginForm h1 {
+.loginCard h1 {
   text-align: center;
   margin-bottom: 2rem;
   color: var(--dark-color);
 }
 
-.loginForm input {
-  width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
+.inputGroup {
+  position: relative;
+  margin-bottom: 1.5rem;
 }
 
-.loginForm button {
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+}
+
+.inputGroup input {
   width: 100%;
-  padding: 0.8rem;
+  padding: 1rem;
+  padding-left: 3rem;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.inputGroup input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 1rem;
   background: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.loginForm button:hover {
+.loginButton:hover {
   background: var(--primary-color-dark);
+  transform: translateY(-2px);
 }
 
-.loginForm button:disabled {
+.loginButton:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-}
-
-.error {
-  color: #dc3545;
-  text-align: center;
-  margin-bottom: 1rem;
-  padding: 8px;
-  background: #ffe6e6;
-  border-radius: 4px;
+  transform: none;
 }
 
 .hint {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
   text-align: center;
   color: #666;
+}
+
+.hint p {
+  margin: 0.5rem 0;
   font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .loginCard {
+    padding: 1.5rem;
+  }
 } 
