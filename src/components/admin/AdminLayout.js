@@ -1,16 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from './AdminLayout.module.css';
 import { 
   FaHome, FaUsers, FaCalendarAlt, FaImages, 
-  FaNewspaper, FaSignOutAlt, FaBars, FaComments 
+  FaNewspaper, FaSignOutAlt, FaBars, FaComments,
+  FaTimes 
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 const AdminLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth <= 768) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const menuItems = [
     { icon: <FaHome />, label: 'Dashboard', path: '/admin' },
@@ -27,16 +42,30 @@ const AdminLayout = ({ children }) => {
     router.push('/admin/login');
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className={styles.adminContainer}>
+      {/* Overlay for mobile */}
+      {isMobile && isSidebarOpen && (
+        <div 
+          className={styles.overlay} 
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
       <aside className={`${styles.sidebar} ${!isSidebarOpen ? styles.collapsed : ''}`}>
         <div className={styles.sidebarHeader}>
           <h2>Admin Panel</h2>
           <button 
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            onClick={toggleSidebar}
             className={styles.toggleButton}
+            aria-label={isSidebarOpen ? 'Close Menu' : 'Open Menu'}
           >
-            <FaBars />
+            {isSidebarOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
         
@@ -46,6 +75,7 @@ const AdminLayout = ({ children }) => {
               key={index} 
               href={item.path}
               className={`${styles.navItem} ${router.pathname === item.path ? styles.active : ''}`}
+              onClick={() => isMobile && setIsSidebarOpen(false)}
             >
               {item.icon}
               <span>{item.label}</span>
@@ -59,13 +89,15 @@ const AdminLayout = ({ children }) => {
         </nav>
       </aside>
 
+      {/* Main Content */}
       <main className={styles.mainContent}>
         <div className={styles.topBar}>
           <button 
             className={styles.mobileMenuButton}
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            onClick={toggleSidebar}
+            aria-label={isSidebarOpen ? 'Close Menu' : 'Open Menu'}
           >
-            <FaBars />
+            {isSidebarOpen ? <FaTimes /> : <FaBars />}
           </button>
           <h1>Admin Dashboard</h1>
         </div>

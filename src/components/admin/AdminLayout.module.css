@@ -2,17 +2,33 @@
   display: flex;
   min-height: 100vh;
   background: #f8f9fa;
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
 }
 
 .sidebar {
   width: 280px;
-  background: var(--dark-color);
+  background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
   color: white;
   padding: 1.5rem;
   transition: all 0.3s ease;
   height: 100vh;
   position: fixed;
   overflow-y: auto;
+  z-index: 999;
+  animation: slideIn 0.3s ease;
 }
 
 .sidebar.collapsed {
@@ -31,6 +47,7 @@
 .sidebarHeader h2 {
   font-size: 1.5rem;
   margin: 0;
+  white-space: nowrap;
 }
 
 .toggleButton {
@@ -39,6 +56,13 @@
   color: white;
   cursor: pointer;
   font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.toggleButton:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .sidebarNav {
@@ -56,14 +80,17 @@
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.3s ease;
-}
-
-.navItem:hover, .navItem.active {
-  background: rgba(255,255,255,0.1);
+  white-space: nowrap;
 }
 
 .navItem svg {
   font-size: 1.2rem;
+  min-width: 1.2rem;
+}
+
+.navItem:hover, .navItem.active {
+  background: rgba(255,255,255,0.1);
+  transform: translateX(5px);
 }
 
 .logoutButton {
@@ -79,10 +106,12 @@
   width: 100%;
   border-radius: 8px;
   margin-top: 2rem;
+  transition: all 0.3s ease;
 }
 
 .logoutButton:hover {
   background: rgba(220, 53, 69, 0.2);
+  transform: translateX(5px);
 }
 
 .mainContent {
@@ -111,13 +140,20 @@
   font-size: 1.5rem;
   cursor: pointer;
   margin-right: 1rem;
+  color: #1e3c72;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.mobileMenuButton:hover {
+  background: rgba(30, 60, 114, 0.1);
 }
 
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
-    position: fixed;
-    z-index: 1000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
   }
 
   .sidebar.collapsed {
@@ -135,5 +171,32 @@
 
   .sidebar.collapsed + .mainContent {
     margin-left: 0;
+  }
+
+  .sidebarHeader h2 {
+    font-size: 1.2rem;
+  }
+
+  .navItem {
+    padding: 0.8rem;
+  }
+}
+
+/* Animation for mobile menu */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 } 
