@@ -1,16 +1,14 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(request) {
-  const { pathname } = request.nextUrl;
-  
-  // Allow access to login page
-  if (pathname === '/admin/login') {
+  // Don't run middleware on login page
+  if (request.nextUrl.pathname === '/admin/login') {
     return NextResponse.next();
   }
 
-  // Protect admin routes
-  if (pathname.startsWith('/admin')) {
-    const token = request.cookies.get('adminToken')?.value;
+  // Check auth for other admin routes
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    const token = request.cookies.get('adminToken') || localStorage.getItem('adminToken');
     
     if (!token) {
       return NextResponse.redirect(new URL('/admin/login', request.url));
@@ -20,7 +18,9 @@ export function middleware(request) {
   return NextResponse.next();
 }
 
-// Simplify the matcher
 export const config = {
-  matcher: ['/admin/:path*']
+  matcher: [
+    '/admin',
+    '/admin/:path*'
+  ]
 }; 

@@ -18,6 +18,15 @@ const nextConfig = {
   assetPrefix: '', // Add this to handle asset paths correctly
   basePath: '',
   trailingSlash: true, // Add this to ensure proper path resolution
+  async redirects() {
+    return [
+      {
+        source: '/admin',
+        destination: '/admin/login',
+        permanent: false,
+      },
+    ];
+  },
 }
 
 module.exports = nextConfig 

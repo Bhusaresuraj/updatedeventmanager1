@@ -6,6 +6,7 @@ const AdminDashboard = () => {
   const router = useRouter();
 
   useEffect(() => {
+    // Check if user is logged in
     const token = localStorage.getItem('adminToken');
     if (!token) {
       router.push('/admin/login');
@@ -14,7 +15,9 @@ const AdminDashboard = () => {
 
   return (
     <AdminLayout>
-      <h1>Welcome to Admin Dashboard</h1>
+      <div>
+        <h1>Welcome to Admin Dashboard</h1>
+      </div>
     </AdminLayout>
   );
 };
