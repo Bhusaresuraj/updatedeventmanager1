@@ -15,30 +15,47 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simple credential check
-    if (
-      credentials.email === 'admin@example.com' && 
-      credentials.password === 'admin123'
-    ) {
-      // Create a simple token
-      const token = btoa(Date.now().toString());
-      localStorage.setItem('adminToken', token);
-      toast.success('Login successful!');
-      router.push('/admin');
-    } else {
-      toast.error('Invalid credentials');
+    // Fixed credentials for production
+    const ADMIN_EMAIL = 'admin@example.com';
+    const ADMIN_PASSWORD = 'admin123';
+
+    try {
+      if (
+        credentials.email === ADMIN_EMAIL && 
+        credentials.password === ADMIN_PASSWORD
+      ) {
+        // Create and store token
+        const token = btoa(`${Date.now()}-${credentials.email}`);
+        localStorage.setItem('adminToken', token);
+        
+        // Set cookie for SSR auth
+        document.cookie = `adminToken=${token}; path=/; max-age=86400`;
+        
+        toast.success('Login successful!');
+        
+        // Redirect to admin dashboard
+        setTimeout(() => {
+          router.push('/admin');
+        }, 1000);
+      } else {
+        throw new Error('Invalid credentials');
+      }
+    } catch (error) {
+      toast.error('Invalid email or password');
+      console.error('Login error:', error);
     }
   };
 
   return (
     <>
       <Head>
-        <title>Admin Login</title>
+        <title>Admin Login | Blizzard Production</title>
+        <meta name="robots" content="noindex,nofollow" />
       </Head>
       <div className={styles.loginContainer}>
         <div className={styles.loginCard}>
           <h1>Admin Login</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className={styles.loginForm}>
             <div className={styles.inputGroup}>
               <FaUser className={styles.inputIcon} />
               <input
@@ -65,7 +82,7 @@ const AdminLogin = () => {
           </form>
           
           <div className={styles.hint}>
-            <p>Use these credentials:</p>
+            <p>Admin Credentials:</p>
             <p>Email: admin@example.com</p>
             <p>Password: admin123</p>
           </div>

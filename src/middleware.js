@@ -3,8 +3,13 @@ import { NextResponse } from 'next/server';
 export function middleware(request) {
   const { pathname } = request.nextUrl;
   
-  // Only protect admin routes that are not the login page
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
+  // Allow access to login page
+  if (pathname === '/admin/login') {
+    return NextResponse.next();
+  }
+
+  // Protect admin routes
+  if (pathname.startsWith('/admin')) {
     const token = request.cookies.get('adminToken')?.value;
     
     if (!token) {
