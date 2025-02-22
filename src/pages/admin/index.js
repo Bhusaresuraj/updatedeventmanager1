@@ -6,10 +6,12 @@ const AdminDashboard = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Check if user is logged in
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      router.push('/admin/login');
+    // Client-side auth check
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('adminToken');
+      if (!token) {
+        router.push('/admin/login');
+      }
     }
   }, [router]);
 

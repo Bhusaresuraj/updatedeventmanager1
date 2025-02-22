@@ -8,7 +8,7 @@ export function middleware(request) {
 
   // Check auth for other admin routes
   if (request.nextUrl.pathname.startsWith('/admin')) {
-    const token = request.cookies.get('adminToken') || localStorage.getItem('adminToken');
+    const token = request.cookies.get('adminToken')?.value;
     
     if (!token) {
       return NextResponse.redirect(new URL('/admin/login', request.url));

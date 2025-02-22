@@ -15,17 +15,27 @@ const AdminLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simple credential check
-    if (
-      credentials.email === 'admin@example.com' && 
-      credentials.password === 'admin123'
-    ) {
-      // Store token
-      localStorage.setItem('adminToken', 'admin-logged-in');
-      
-      toast.success('Login successful!');
-      router.push('/admin');
-    } else {
+    try {
+      // Simple credential check
+      if (
+        credentials.email === 'admin@example.com' && 
+        credentials.password === 'admin123'
+      ) {
+        // Create token
+        const token = btoa(Date.now().toString());
+        
+        // Store in localStorage for client-side checks
+        localStorage.setItem('adminToken', token);
+        
+        // Store in cookie for server-side checks
+        document.cookie = `adminToken=${token}; path=/; max-age=86400`;
+        
+        toast.success('Login successful!');
+        router.push('/admin');
+      } else {
+        throw new Error('Invalid credentials');
+      }
+    } catch (error) {
       toast.error('Invalid credentials');
     }
   };

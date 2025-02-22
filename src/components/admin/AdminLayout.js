@@ -14,11 +14,13 @@ const AdminLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Check authentication on mount
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      router.push('/admin/login');
+    // Client-side auth check
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('adminToken');
+      if (!token) {
+        router.push('/admin/login');
+      }
     }
   }, [router]);
 
@@ -45,7 +47,9 @@ const AdminLayout = ({ children }) => {
   ];
 
   const handleLogout = () => {
+    // Clear both localStorage and cookie
     localStorage.removeItem('adminToken');
+    document.cookie = 'adminToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     toast.success('Logged out successfully');
     router.push('/admin/login');
   };
