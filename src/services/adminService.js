@@ -9,7 +9,22 @@ class AdminService {
         body: JSON.stringify(credentials)
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message || 'Login failed');
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getStats() {
+    try {
+      const response = await fetch(`${API_URL}/admin/stats`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+        }
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Failed to fetch stats');
       return data;
     } catch (error) {
       throw error;
@@ -24,7 +39,7 @@ class AdminService {
         }
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message || 'Failed to fetch team members');
       return data;
     } catch (error) {
       throw error;
@@ -42,7 +57,7 @@ class AdminService {
         body: JSON.stringify(memberData)
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message || 'Failed to add team member');
       return data;
     } catch (error) {
       throw error;
@@ -58,14 +73,14 @@ class AdminService {
         }
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message || 'Failed to delete team member');
       return data;
     } catch (error) {
       throw error;
     }
   }
 
-  // Add more admin service methods as needed
+  // Add more methods as needed
 }
 
 export default AdminService; 
