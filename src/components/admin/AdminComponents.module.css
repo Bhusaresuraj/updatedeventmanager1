@@ -264,4 +264,41 @@
 
 .instagramLink:hover {
   background: #C13584;
+}
+
+/* Add these styles */
+.rating {
+  color: #ffc107;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.cardContent {
+  padding: 1rem;
+}
+
+.role {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.content {
+  margin: 1rem 0;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.deleteButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.deleteButton:hover {
+  background: #c82333;
 } 

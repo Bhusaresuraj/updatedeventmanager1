@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import styles from './AdminLayout.module.css';
 import { 
   FaHome, FaUsers, FaCalendarAlt, FaImages, 
-  FaNewspaper, FaSignOutAlt, FaBars 
+  FaNewspaper, FaSignOutAlt, FaBars, FaComments 
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -17,7 +17,8 @@ const AdminLayout = ({ children }) => {
     { icon: <FaUsers />, label: 'Team', path: '/admin/team' },
     { icon: <FaCalendarAlt />, label: 'Events', path: '/admin/events' },
     { icon: <FaImages />, label: 'Gallery', path: '/admin/gallery' },
-    { icon: <FaNewspaper />, label: 'Services', path: '/admin/services' }
+    { icon: <FaNewspaper />, label: 'Services', path: '/admin/services' },
+    { icon: <FaComments />, label: 'Testimonials', path: '/admin/testimonials' }
   ];
 
   const handleLogout = () => {

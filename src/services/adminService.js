@@ -80,6 +80,55 @@ class AdminService {
     }
   }
 
+  static async getTestimonials() {
+    try {
+      const response = await fetch(`${API_URL}/admin/testimonials`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+        }
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Failed to fetch testimonials');
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async addTestimonial(testimonialData) {
+    try {
+      const response = await fetch(`${API_URL}/admin/testimonials`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(testimonialData)
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Failed to add testimonial');
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async deleteTestimonial(id) {
+    try {
+      const response = await fetch(`${API_URL}/admin/testimonials/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+        }
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Failed to delete testimonial');
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   // Add more methods as needed
 }
 
