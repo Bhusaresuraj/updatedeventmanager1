@@ -22,6 +22,7 @@ const AdminDashboard = () => {
       setStats(data);
     } catch (err) {
       setError('Failed to load dashboard stats');
+      console.error('Dashboard Error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -31,13 +32,11 @@ const AdminDashboard = () => {
     return <div className={styles.loading}>Loading dashboard...</div>;
   }
 
-  if (error) {
-    return <div className={styles.error}>{error}</div>;
-  }
-
   return (
     <div className={styles.managerContainer}>
       <h1>Admin Dashboard</h1>
+      
+      {error && <div className={styles.error}>{error}</div>}
       
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
@@ -67,8 +66,8 @@ const AdminDashboard = () => {
           <button onClick={() => window.location.href = '/admin/artists'}>
             Manage Artists
           </button>
-          <button onClick={() => window.location.href = '/admin/enquiries'}>
-            View Enquiries
+          <button onClick={() => window.location.href = '/admin/gallery'}>
+            Manage Gallery
           </button>
           <button onClick={() => window.location.href = '/admin/services'}>
             Manage Services
