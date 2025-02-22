@@ -19,12 +19,29 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
+      // Log the attempt
+      console.log('Login attempt with:', {
+        email: credentials.email,
+        expectedEmail: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
+        passwordMatch: credentials.password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+      });
+
       const data = await AdminService.login(credentials);
+      
+      // Store token
       localStorage.setItem('adminToken', data.token);
-      toast.success('Login successful!');
-      router.push('/admin');
+      
+      // Show success message
+      toast.success('Login successful! Redirecting...');
+      
+      // Redirect after a short delay
+      setTimeout(() => {
+        router.push('/admin');
+      }, 1000);
+      
     } catch (error) {
-      toast.error('Invalid credentials');
+      console.error('Login error:', error);
+      toast.error(error.message || 'Invalid email or password');
     } finally {
       setLoading(false);
     }
@@ -71,7 +88,7 @@ const AdminLogin = () => {
           <div className={styles.hint}>
             <p>Default Admin Credentials:</p>
             <p>Email: {process.env.NEXT_PUBLIC_ADMIN_EMAIL}</p>
-            <p>Password: admin123</p>
+            <p>Password: {process.env.NEXT_PUBLIC_ADMIN_PASSWORD}</p>
           </div>
         </div>
       </div>

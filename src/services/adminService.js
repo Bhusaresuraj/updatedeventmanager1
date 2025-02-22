@@ -3,15 +3,26 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 class AdminService {
   static async login(credentials) {
     try {
+      // First check if credentials match the environment variables
+      if (credentials.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL && 
+          credentials.password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
+        // Create a mock token for development
+        const token = btoa(credentials.email + Date.now());
+        return { token, message: 'Login successful' };
+      }
+
+      // If not matching local credentials, try the API
       const response = await fetch(`${API_URL}/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials)
       });
+
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || 'Login failed');
       return data;
     } catch (error) {
+      console.error('Login error:', error);
       throw error;
     }
   }
