@@ -38,7 +38,7 @@ const AdminLayout = ({ children }) => {
   }, []);
 
   const menuItems = [
-    { icon: <FaHome />, label: 'Dashboard', path: '/admin' },
+    { icon: <FaHome />, label: 'Dashboard', path: '/admin/dashboard' },
     { icon: <FaUsers />, label: 'Team', path: '/admin/team' },
     { icon: <FaCalendarAlt />, label: 'Events', path: '/admin/events' },
     { icon: <FaImages />, label: 'Gallery', path: '/admin/gallery' },

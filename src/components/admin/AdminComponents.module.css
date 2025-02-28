@@ -478,4 +478,740 @@
   .cardHeader img {
     margin: 0 0 1rem 0;
   }
+}
+
+/* Add these styles to your existing CSS */
+
+.eventsGrid {
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.eventCard {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.eventCard:hover {
+  transform: translateY(-5px);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  background: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.cardContent {
+  padding: 1rem;
+}
+
+.cardContent h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.shortDesc {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.eventDetails {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.eventDetails p {
+  margin: 0.3rem 0;
+}
+
+.cardActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.deleteBtn, .editBtn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  flex: 1;
+}
+
+.deleteBtn {
+  background: #ff4444;
+  color: white;
+}
+
+.editBtn {
+  background: #2196F3;
+  color: white;
+}
+
+.deleteBtn:hover {
+  background: #cc0000;
+}
+
+.editBtn:hover {
+  background: #0b7dda;
+}
+
+.error {
+  color: #ff4444;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* Add these styles to your existing CSS */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+.modal h2 {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 1rem 0;
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  z-index: 1;
+}
+
+.updateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.previewImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.galleryPreview {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.modalActions {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  z-index: 1;
+  border-top: 1px solid #eee;
+}
+
+.cancelBtn,
+.submitBtn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  flex: 1;
+}
+
+.cancelBtn {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.submitBtn {
+  background: #2196F3;
+  color: white;
+}
+
+.cancelBtn:hover {
+  background: #e5e5e5;
+}
+
+.submitBtn:hover {
+  background: #0b7dda;
+}
+
+.cancelBtn:disabled,
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Service Card Styles */
+.servicesGrid {
+  margin-top: 3rem;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.serviceCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.serviceCard:hover .bannerImage {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  padding: 1.5rem;
+}
+
+.cardContent h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.shortDesc {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.whatsappGroups {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin: 1.5rem 0;
+}
+
+.whatsappGroups h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.whatsappLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.whatsappLink:last-child {
+  border-bottom: none;
+}
+
+.groupTitle {
+  font-weight: 500;
+  color: #444;
+  margin: 0;
+}
+
+.whatsappLink a {
+  background: #25D366;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.whatsappLink a:hover {
+  background: #128C7E;
+}
+
+.additionalInfo {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin: 1.5rem 0;
+}
+
+.additionalInfo p {
+  margin: 0.5rem 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.mediaGallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+
+.mediaImage {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.mediaImage:hover {
+  transform: scale(1.05);
+}
+
+.cardActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.deleteBtn, .editBtn {
+  padding: 0.8rem 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  flex: 1;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.deleteBtn {
+  background: #dc3545;
+  color: white;
+}
+
+.editBtn {
+  background: #0d6efd;
+  color: white;
+}
+
+.deleteBtn:hover {
+  background: #c82333;
+}
+
+.editBtn:hover {
+  background: #0b5ed7;
+}
+
+/* Improved scrollbar styles */
+.modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Common Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Event Modal Styles */
+.eventModal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.eventModal h2 {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 1rem 0;
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  font-size: 1.6rem;
+  z-index: 1;
+}
+
+/* Service Modal Styles */
+.serviceModal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 1rem auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.serviceModal h2 {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 1rem 0;
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  z-index: 1;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* Event Update Form */
+.eventUpdateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Service Update Form */
+.serviceUpdateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+/* WhatsApp Link Groups (Service Only) */
+.whatsappLinkGroup {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #e9ecef;
+}
+
+.whatsappLinkGroup h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+/* Form Groups */
+.eventFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.serviceFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+/* Input Styles */
+.eventFormGroup input,
+.eventFormGroup textarea {
+  padding: 0.7rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.serviceFormGroup input,
+.serviceFormGroup textarea {
+  padding: 0.8rem;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f8f9fa;
+}
+
+/* Modal Actions */
+.eventModalActions {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  z-index: 1;
+  border-top: 1px solid #eee;
+}
+
+.serviceModalActions {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 1.5rem 0;
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  z-index: 1;
+  border-top: 2px solid #f0f0f0;
+}
+
+/* Buttons */
+.eventCancelBtn,
+.eventSubmitBtn {
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.serviceCancelBtn,
+.serviceSubmitBtn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  flex: 1;
+  font-size: 1rem;
+}
+
+/* Button Colors */
+.eventCancelBtn,
+.serviceCancelBtn {
+  background: #f8f9fa;
+  color: #444;
+}
+
+.eventSubmitBtn,
+.serviceSubmitBtn {
+  background: #0d6efd;
+  color: white;
+}
+
+.eventCancelBtn:hover,
+.serviceCancelBtn:hover {
+  background: #e9ecef;
+}
+
+.eventSubmitBtn:hover,
+.serviceSubmitBtn:hover {
+  background: #0b5ed7;
+}
+
+/* Scrollbar Styles */
+.eventModal::-webkit-scrollbar,
+.serviceModal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.eventModal::-webkit-scrollbar-track,
+.serviceModal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.eventModal::-webkit-scrollbar-thumb,
+.serviceModal::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.eventModal::-webkit-scrollbar-thumb:hover,
+.serviceModal::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Additional Service-specific Styles */
+.additionalContentSection {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border: 1px solid #e9ecef;
+}
+
+.additionalContentSection h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Media Preview Styles */
+.mediaPreview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.previewItem {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 aspect ratio */
+}
+
+.previewImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+/* Add these styles to your existing CSS */
+
+.select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+  appearance: none; /* Remove default arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+.select:hover {
+  border-color: #adb5bd;
 } 

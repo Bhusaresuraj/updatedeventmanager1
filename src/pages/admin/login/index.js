@@ -26,26 +26,32 @@ const AdminLogin = () => {
     setIsLoading(true);
 
     try {
-      if (
-        credentials.email === 'admin@example.com' && 
-        credentials.password === 'admin123'
-      ) {
-        // Create token
-        const token = btoa(`${Date.now()}-${credentials.email}`);
-        
-        // Set cookie
-        document.cookie = `adminToken=${token}; path=/; max-age=86400; SameSite=Strict`;
-        localStorage.setItem('adminToken', token);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Store the token in localStorage
+        localStorage.setItem('adminToken', data.data.token);
         
         toast.success('Login successful!');
-
         // Use replace instead of push to avoid back button issues
-        await router.replace('/admin');
+        await router.replace('/admin/dashboard');
       } else {
         throw new Error('Invalid credentials');
       }
     } catch (error) {
       toast.error('Invalid credentials');
+    } finally {
       setIsLoading(false);
     }
   };
@@ -92,8 +98,8 @@ const AdminLogin = () => {
           
           <div className={styles.hint}>
             <p>Login with:</p>
-            <p>Email: admin@example.com</p>
-            <p>Password: admin123</p>
+            <p>Email:admin@blizard.com</p>
+            <p>Password:admin123</p>
           </div>
         </div>
       </div>

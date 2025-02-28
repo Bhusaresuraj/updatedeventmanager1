@@ -47,7 +47,7 @@ const About = () => {
             <div className={styles.overviewGrid}>
               <div className={styles.overviewImage}>
                 <OptimizedImage
-                  src="https://via.placeholder.com/800x600"
+                  src="https:/via.placeholder.com/800x600"
                   alt="Blizard Production House Overview"
                   width={600}
                   height={400}
