@@ -1,0 +1,148 @@
+.artistsPage {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.heroSection {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+              url('/images/artists-hero.jpg') center/cover;
+  padding: 120px 20px;
+  text-align: center;
+  color: white;
+}
+
+.heroSection h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.8s ease;
+}
+
+.heroSection p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  animation: fadeInUp 1s ease;
+}
+
+.artistsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.artistCard {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.artistCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.artistImage {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.artistImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.artistCard:hover .artistImage img {
+  transform: scale(1.05);
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #ffd700;
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.artistInfo {
+  padding: 1.5rem;
+}
+
+.artistInfo h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.specialization {
+  color: #0070f3;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.artistType {
+  color: #666;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+
+.artistMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.socialLinks a {
+  color: #666;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.socialLinks a:hover {
+  color: #0070f3;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection h1 {
+    font-size: 2.5rem;
+  }
+  
+  .artistsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 2rem 1rem;
+  }
+} 

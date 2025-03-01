@@ -10,7 +10,6 @@ import { EventContext } from '../context/EventContext';
 import styles from '../styles/Home.module.css';
 import ChatBot from '../components/ChatBot';
 import Link from 'next/link';
-import { services } from '../data/services';
 import Location from '../components/Location';
 import { FaWhatsapp, FaInstagram, FaFacebook, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import ThankYouMessage from '../components/ThankYouMessage';
@@ -61,6 +60,9 @@ const HeroLinks = () => {
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { events } = React.useContext(EventContext);
+  const [services, setServices] = useState([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
+  const [servicesError, setServicesError] = useState(null);
 
   useEffect(() => {
     // Check if we're returning from another page
@@ -100,6 +102,28 @@ const Home = () => {
     return () => {
       serviceBlogs.forEach((blog) => observer.unobserve(blog));
     };
+  }, []);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`);
+        const data = await response.json();
+        
+        if (data.success) {
+          setServices(data.data);
+        } else {
+          throw new Error(data.message || 'Failed to fetch services');
+        }
+      } catch (err) {
+        console.error('Error fetching services:', err);
+        setServicesError(err.message);
+      } finally {
+        setServicesLoading(false);
+      }
+    };
+
+    fetchServices();
   }, []);
 
   if (isLoading) {
@@ -201,29 +225,30 @@ const Home = () => {
         <section id="services" className={`section ${styles.services}`}>
           <div className="container">
             <h2 className="section-title">Our Services</h2>
-            <div className={styles.servicesGrid}>
-              {services.map((service) => (
-                <Link 
-                  href={`/services/${service.id}`} 
-                  key={service.id} 
-                  className={styles.serviceBlog}
-                >
-                  <div className={styles.serviceImage}>
-                    <img src={service.image} alt={service.title} />
-                  </div>
-                  <div className={styles.serviceContent}>
-                    <h3>{service.title}</h3>
-                    <p>{service.shortDescription}</p>
-                    <ul>
-                      {service.features.slice(0, 3).map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                    <EnquiryButton />
-                  </div>
-                </Link>
-              ))}
-            </div>
+            {servicesLoading ? (
+              <div>Loading services...</div>
+            ) : servicesError ? (
+              <div>Error loading services: {servicesError}</div>
+            ) : (
+              <div className={styles.servicesGrid}>
+                {services.map((service) => (
+                  <Link 
+                    href={`/services/${service._id}`} 
+                    key={service._id} 
+                    className={styles.serviceBlog}
+                  >
+                    <div className={styles.serviceImage}>
+                      <img src={service.bannerImage} alt={service.name} />
+                    </div>
+                    <div className={styles.serviceContent}>
+                      <h3>{service.name}</h3>
+                      <p>{service.shortDescription}</p>
+                      <EnquiryButton />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

@@ -1,13 +1,33 @@
 .serviceContainer {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background: var(--background-color);
 }
 
 .serviceContent {
-  flex: 1 0 auto;
-  padding-top: 80px; /* Height of navbar */
+  flex: 1;
+}
+
+.heroSection {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.heroBanner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
 }
 
 .contentWrapper {
@@ -16,137 +36,159 @@
   padding: 2rem;
 }
 
-.heroSection {
-  position: relative;
-  width: 100%;
-  height: 60vh;
-  min-height: 400px;
-  overflow: hidden;
+.description {
+  margin: 2rem 0;
 }
 
-.heroSection img {
+.whatsappGroups {
+  margin: 3rem 0;
+}
+
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.whatsappGroup {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.whatsappLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #25D366;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 1rem;
+  transition: background-color 0.2s;
+}
+
+.whatsappLink:hover {
+  background: #128C7E;
+}
+
+.whatsappIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.mediaGallery {
+  margin: 3rem 0;
+}
+
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.mediaItem {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.mediaImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s;
 }
 
-.heroContent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.mediaImage:hover {
+  transform: scale(1.05);
+}
+
+.contactInfo {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.contactDetails {
+  margin-top: 1.5rem;
+}
+
+.contactItem {
+  margin: 1rem 0;
+}
+
+.contactLabel {
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.specialLinks {
+  margin: 3rem 0;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  padding: 2rem;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.7)
-  );
-  color: var(--light-color);
 }
 
-.heroContent h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.specialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #0070f3;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s;
 }
 
-.heroContent p {
+.specialLink:hover {
+  background: #0051cc;
+}
+
+.arrow {
   font-size: 1.2rem;
-  max-width: 600px;
-}
-
-.description {
-  margin: 4rem 0;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: var(--text-color);
-}
-
-.features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
-  margin: 4rem 0;
-}
-
-.featuresList,
-.benefitsList {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 15px;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-
-.featuresList h2,
-.benefitsList h2 {
-  color: var(--accent-color);
-  margin-bottom: 1.5rem;
-}
-
-.featuresList ul,
-.benefitsList ul {
-  list-style: none;
-  padding: 0;
-}
-
-.featuresList li,
-.benefitsList li {
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-  position: relative;
-}
-
-.featuresList li::before,
-.benefitsList li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--accent-color);
 }
 
 .cta {
-  text-align: center;
-  margin: 4rem 0;
-  padding: 3rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.cta h2 {
-  color: var(--light-color);
-  margin-bottom: 2rem;
+.formLink {
+  background: #0070f3;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.formLink:hover {
+  background: #0051cc;
 }
 
 @media (max-width: 768px) {
-  .heroContent h1 {
-    font-size: 2rem;
-  }
-
-  .heroContent p {
-    font-size: 1rem;
-  }
-
-  .features {
-    grid-template-columns: 1fr;
+  .heroSection {
+    height: 300px;
   }
 
   .contentWrapper {
     padding: 1rem;
   }
 
-  .description {
-    margin: 2rem 0;
+  .groupsGrid {
+    grid-template-columns: 1fr;
   }
 
-  .cta {
-    margin: 2rem 0;
-    padding: 2rem;
+  .mediaGrid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 } 

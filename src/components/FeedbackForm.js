@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from './FeedbackForm.module.css';
-import { submitFeedback } from '../services/api';
 
 const FeedbackForm = () => {
   const [formData, setFormData] = useState({

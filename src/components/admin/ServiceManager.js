@@ -8,15 +8,13 @@ const ServiceManager = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [validServiceNames] = useState([
-    'Artist Management',
-    'Venue Management',
-    'Event Planning',
-    'Marketing',
-    'Ticketing',
-    'Production',
-    'Sponsorship',
-    'HR',
-    'Finance'
+    "ArtistManagement",
+    "HR",
+    "Events",
+    "Marketing",
+    "Akashwani",
+    "AkashSports",
+    "ActingAcademy",
   ]);
   const [newService, setNewService] = useState({
     name: validServiceNames[0],

@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { fetchEvents } from '../services/api';
 
 export const EventContext = createContext();
 
