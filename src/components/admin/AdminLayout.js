@@ -41,7 +41,7 @@ const AdminLayout = ({ children }) => {
     { icon: <FaHome />, label: 'Dashboard', path: '/admin/dashboard' },
     { icon: <FaUsers />, label: 'Team', path: '/admin/team' },
     { icon: <FaCalendarAlt />, label: 'Events', path: '/admin/events' },
-    { icon: <FaImages />, label: 'Gallery', path: '/admin/gallery' },
+    { icon: <FaImages />, label: 'Registrations', path: '/admin/registrations' },
     { icon: <FaNewspaper />, label: 'Services', path: '/admin/services' },
     { icon: <FaComments />, label: 'Testimonials', path: '/admin/testimonials' }
   ];

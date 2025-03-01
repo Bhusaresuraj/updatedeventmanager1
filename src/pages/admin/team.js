@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
-import AdminService from '../../services/adminService';
 import styles from '../../styles/AdminTeam.module.css';
 import { toast } from 'react-toastify';
 

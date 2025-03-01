@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styles from './AdminComponents.module.css';
-import { fetchEvents, addEvent, updateEvent, deleteEvent } from '../../services/adminApi';
 import { toast } from 'react-hot-toast';
 import UpdateEventModal from './UpdateEventModal';
 

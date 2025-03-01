@@ -50,9 +50,7 @@ const ServiceDetail = ({ service, isSpecialService }) => {
         </div>
 
         <div className={styles.contentWrapper}>
-          <section className={styles.description}>
-            <p>{service.description}</p>
-          </section>
+
 
           {/* WhatsApp Groups Section */}
           {service.whatsappLink && service.whatsappLink.length > 0 && (

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './AdminComponents.module.css';
 import { toast } from 'react-toastify';
-import AdminService from '../../services/adminService';
 import { FaStar, FaStarHalf, FaImage, FaTrash, FaEdit } from 'react-icons/fa';
 
 const TestimonialManager = () => {

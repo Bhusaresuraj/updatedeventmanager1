@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styles from './AdminComponents.module.css';
-import { uploadImage } from '../../services/adminApi';
 
 const GalleryManager = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);

@@ -202,37 +202,164 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* Modal */
+/* Enhanced Modal Styles */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   cursor: pointer;
-  animation: modalFade 0.3s ease;
+  animation: modalFadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  padding: 2rem;
+}
+
+.modal::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  z-index: -1;
+  animation: radialExpand 0.5s ease-out;
+}
+
+.modalContent {
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal img {
-  max-width: 90%;
-  max-height: 90vh;
-  border-radius: 10px;
-  animation: modalZoom 0.3s ease;
+  max-width: 100%;
+  max-height: 85vh;
+  border-radius: 15px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: modalZoomIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  object-fit: contain;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-@keyframes modalFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.closeModalBtn {
+  position: absolute;
+  top: -3rem;
+  right: -3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes modalZoom {
-  from { transform: scale(0.9); }
-  to { transform: scale(1); }
+.closeModalBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.modalNavigation {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  pointer-events: none;
+}
+
+.navButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.navButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes radialExpand {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Responsive Styles */
+@media (max-width: 768px) {
+  .modal {
+    padding: 1rem;
+  }
+
+  .closeModalBtn {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .modalNavigation {
+    padding: 0 1rem;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @keyframes fadeInUp {
@@ -263,5 +390,208 @@
 
   .mainContent {
     padding: 0 1rem;
+  }
+}
+
+/* Enhanced Responsive Styles */
+@media (max-width: 1400px) {
+  .mainContent {
+    max-width: 1200px;
+    padding: 0 3rem;
+  }
+
+  .infoGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .heroContent h1 {
+    font-size: 3.5rem;
+  }
+
+  .infoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .galleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .mainContent {
+    padding: 0 2rem;
+    margin-top: -80px;
+  }
+
+  .heroSection {
+    height: 70vh;
+  }
+
+  .heroContent {
+    bottom: 20%;
+  }
+
+  .description {
+    padding: 2rem;
+  }
+
+  .registrationCard {
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .heroContent {
+    left: 5%;
+    right: 5%;
+    bottom: 15%;
+  }
+
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
+
+  .shortDescription {
+    font-size: 1rem;
+  }
+
+  .mainContent {
+    padding: 0 1.5rem;
+    margin-top: -60px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .infoCard {
+    padding: 1.5rem;
+  }
+
+  .description {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .galleryGrid {
+    gap: 1rem;
+  }
+
+  .galleryItem img {
+    height: 250px;
+  }
+
+  .modal {
+    padding: 1rem;
+  }
+
+  .modalContent {
+    max-width: 95%;
+  }
+
+  .closeModalBtn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+
+  .navButton {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent h1 {
+    font-size: 2rem;
+  }
+
+  .status, .category {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .mainContent {
+    padding: 0 1rem;
+    margin-top: -50px;
+  }
+
+  .infoIcon {
+    font-size: 2rem;
+  }
+
+  .registerButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .galleryItem img {
+    height: 200px;
+  }
+
+  .modal img {
+    max-height: 80vh;
+  }
+}
+
+/* Handle landscape orientation */
+@media (max-height: 600px) and (orientation: landscape) {
+  .heroSection {
+    height: 100vh;
+  }
+
+  .heroContent {
+    bottom: 10%;
+  }
+
+  .modal img {
+    max-height: 70vh;
+  }
+}
+
+/* High-resolution screens */
+@media (min-width: 1600px) {
+  .mainContent {
+    max-width: 1600px;
+  }
+
+  .heroContent h1 {
+    font-size: 4.5rem;
+  }
+
+  .infoGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .heroSection {
+    height: auto;
+    min-height: auto;
+  }
+
+  .heroOverlay {
+    display: none;
+  }
+
+  .heroContent {
+    position: relative;
+    color: black;
+  }
+
+  .registerButton,
+  .modal {
+    display: none;
   }
 } 
