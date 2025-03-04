@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styles from './AdminComponents.module.css';
-import { manageArtist } from '../../services/adminApi';
 
 const ArtistManager = () => {
   const [artists, setArtists] = useState([]);
