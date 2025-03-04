@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 // Use environment variables for these values
 const JWT_SECRET = process.env.JWT_SECRET;
